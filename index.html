@@ -18,16 +18,334 @@
 		<link href="assets/css/brands.css" rel="stylesheet">
 		<link href="assets/css/solid.css" rel="stylesheet">
 		<link href="assets/css/fontawesome.css" rel="stylesheet">
+
 		<style>
-			ul {
-			  list-style: none; /* Remove default bullets */
-			  text-align: center;
+			.exp-timeline-container {
+				position: relative;
+				width: 90%;
+				margin: 0 auto;
+				padding: 80px 0;
 			}
-			
-			li:before {
-			  content: ""; /* Hide the bullet */
-			  
-			}
+			/* TIMELINE ITEMS */
+.exp-timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.exp-timeline-item.left {
+    left: 50%;
+    text-align: right;
+}
+
+.exp-timeline-item.right {
+    left: 50%;
+    text-align: left;
+}
+
+/* Content box */
+.exp-timeline-item .content {
+    background: rgba(255,255,255,0.05);
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    max-width: 80%; /* reduce width to fit nicely */
+}
+
+/* Adjust spacing for left/right items */
+.exp-timeline-item.left .content {
+    margin-right: calc(5% + 10px); /* relative to container */
+}
+
+.exp-timeline-item.right .content {
+    margin-left: calc(5% + 10px);
+}
+
+/* Timeline bullets */
+.exp-timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 25px;
+    width: 14px;
+    height: 14px;
+    background: #18bfef;
+    border-radius: 50%;
+}
+
+.exp-timeline-item.left::after {
+    right: -7px;
+}
+
+.exp-timeline-item.right::after {
+    left: -7px;
+}
+
+/* Experience Placards */
+.exp-placards-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 40px;
+	margin: 40px 0;
+	flex-wrap: wrap;
+}
+
+.exp-placard {
+	flex: 1;
+	min-width: 200px;
+	padding: 30px;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	text-align: center;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+}
+
+.exp-placard::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+	transition: left 0.5s ease;
+	z-index: 0;
+}
+
+.exp-placard:hover::before {
+	left: 100%;
+}
+
+.exp-placard:hover {
+	transform: translateY(-8px) scale(1.05);
+	border-color: rgba(225, 17, 17, 0.3);
+}
+
+.exp-placard.left-placard {
+	background: linear-gradient(135deg, rgba(24, 191, 239, 0.15), rgba(24, 191, 239, 0.05));
+	border-color: rgba(24, 191, 239, 0.3);
+}
+
+.exp-placard.left-placard:hover {
+	box-shadow: 0 0 30px rgba(24, 191, 239, 0.4);
+}
+
+.exp-placard.right-placard {
+	background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(167, 139, 250, 0.05));
+	border-color: rgba(167, 139, 250, 0.3);
+}
+
+.exp-placard.right-placard:hover {
+	box-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
+}
+
+.exp-placard-number {
+	font-size: 2.5rem;
+	font-weight: bold;
+	margin-bottom: 10px;
+	background: linear-gradient(90deg, #18bfef, #a78bfa);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	position: relative;
+	z-index: 1;
+}
+
+.exp-placard-label {
+	font-size: 0.95rem;
+	color: #000;
+	position: relative;
+	z-index: 1;
+	transition: color 0.3s ease;
+}
+
+.exp-placard:hover .exp-placard-label {
+	color: rgba(208, 11, 11, 0.95);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .exp-timeline-item {
+        width: 100%;
+        left: 0 !important;
+        text-align: left;
+        padding-left: 60px;
+        margin-bottom: 30px;
+    }
+
+    .exp-timeline-line,
+    .exp-timeline-progress {
+        left: 20px;
+    }
+
+    .exp-timeline-item::after {
+        left: 12px;
+    }
+
+    .exp-timeline-item .content {
+        max-width: 90%;
+        margin: 0;
+    }
+
+	.exp-placards-container {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.exp-placard {
+		width: 100%;
+	}
+}
+/* base line */
+.exp-timeline-line {
+	position: absolute;
+	left: 50%;
+	width: 4px;
+	height: 100%;
+	background: rgba(255,255,255,0.1);
+	transform: translateX(-50%);
+	/* z-index: 1; */
+}
+
+/* 🔥 GRADIENT PROGRESS */
+.exp-timeline-progress {
+	position: absolute;
+	left: 50%;
+	width: 4px;
+	height: 100%;
+	transform: translateX(-50%);
+	z-index: 2;
+
+	background: linear-gradient(
+		180deg,
+		#18bfef,
+		#4ade80,
+		#a78bfa,
+		#f59e0b
+	);
+
+	background-size: 100% 300%;
+	animation: expGradient 4s linear infinite;
+}
+
+@keyframes expGradient {
+	0% { background-position: 0% 0%; }
+	100% { background-position: 0% 100%; }
+}
+
+/* ITEMS */
+.exp-timeline-item {
+	position: relative;
+	width: 50%;
+	padding: 40px;
+	opacity: 0;
+	transform: translateY(50px);
+	transition: all 0.6s ease;
+}
+
+.exp-timeline-item.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.exp-left {
+	left: 0;
+	text-align: right;
+}
+
+.exp-right {
+	left: 50%;
+}
+
+/* CARD */
+.exp-content {
+	background: rgba(255,255,255,0.05);
+	backdrop-filter: blur(10px);
+	padding: 20px;
+	border-radius: 10px;
+	display: inline-block;
+	max-width: 420px;
+	transition: all 0.3s ease;
+}
+
+/* .exp-content p {
+	margin: 0;
+	margin-bottom: 8px;
+	line-height: 1.4;
+	word-wrap: break-word;
+	white-space: normal;
+} */
+
+/* .exp-content p:last-child {
+	margin-bottom: 0;
+} */
+
+.exp-content:hover {
+	transform: translateY(-5px) scale(1.03);
+}
+
+/* HEADER */
+.exp-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.exp-logo {
+	width: 28px;
+	height: 28px;
+}
+
+/* YEAR HIGHLIGHT */
+.exp-year {
+	display: inline-block;
+	margin: 10px 0;
+	font-weight: bold;
+	font-size: 0.9rem;
+
+	background: linear-gradient(90deg, #188befd0, #a78bfa);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+/* DOT */
+.exp-timeline-item::after {
+	content: '';
+	position: absolute;
+	top: 45px;
+	width: 14px;
+	height: 14px;
+	background: #18bfef;
+	border-radius: 50%;
+	z-index: 3;
+}
+
+.exp-left::after { right: -7px; }
+.exp-right::after { left: -7px; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+	.exp-timeline-item {
+		width: 100%;
+		left: 0 !important;
+		text-align: left;
+		padding-left: 60px;
+	}
+
+	.exp-timeline-line,
+	.exp-timeline-progress {
+		left: 20px;
+	}
+
+	.exp-timeline-item::after {
+		left: 12px;
+	}
+}
 		</style>
 	</head>
 
@@ -42,7 +360,7 @@
 						Akhilrajan</h1>
 						<p>A robotics engineering graduate, open to work as a full time employee in the field of robotics or automation.<br/> A dedicated engineer who loves to solve 
 						complex problems through innovative feasible solutions.<br/>
-						I am currently working as a Graduate Research Assistant at the Maryland Robotics Center, CDCL Group.
+						I am currently working as a Robotics Engineer at Caterpillar, Peoria, IL, CTCT Group.
 						<blockquote>
 							The best way to predict the future is to create it.
 						</blockquote>
@@ -62,10 +380,10 @@
 				<!-- Nav -->
 					<nav id="nav">
 						
-						<ul class="links">
+						<ul class="links">  
 
 							<li class="active"><a href="index.html">HOME</a></li>
-							<li><a href="research.html">Research</a></li>
+							<li><a href="research.html">Experience</a></li>
 							<li><a href="CVprojects.html">Perception Projects</a></li>
 							<li><a href="Planning.html">Planning & Prediction Projects</a></li>
 							<li><a href="ML.html">ML Projects</a></li>
@@ -85,327 +403,117 @@
 
 							<section>
 								<h2>About Me</h2>
-								<p><span class="image left"><img src="images/me.jpg" alt="" /></span>Hello! I am Akhil, a robotics engineering graduate. I am <b>actively seeking full-time opportunities</b> in the field of 
-									robotics, path planning, perception, localization, ML/AI, and/or controls.<br> I am working as a Graduate Research Assistant (GRA) at the University of Maryland, College Park. 
-									My areas of research include path planning, SLAM, outdoor navigation, multi-robot collaborative decision making, ML, Deep Learning, and perception. 
-									I have extensive research and project experiences in the fields of Machine Learning, Planning and various Software package development (Autonomy Stack) such as 
-									navigation, perception based localization, swarm-robot interface and navigation stack. <br>Please feel free to connect with me on my socials. 
-									</p>
+								<p><span class="image left"><img src="images/me.jpg" alt="" /></span>Hello! I am Akhil Rajan, a Robotics Software Engineer specializing in autonomy, state estimation, and control for real-world robotic 
+									systems. Currently at Caterpillar, I develop and deploy production-grade kinematic propagation and sensor fusion frameworks (GNSS + IMU) achieving millimeter-level accuracy on industrial machines. My experience spans
+									 VIO/EKF-based localization, LiDAR mapping, real-time perception on embedded platforms (Jetson Xavier), and end-to-end autonomy deployment on systems such as Boston Dynamics Spot. I focus on building modular, 
+									 high-performance algorithms that bridge simulation and hardware, with an emphasis on robustness, scalability, and production readiness. 
+									</p><br>									
+									<h3>Experience</h3>
+								<div class="exp-placards-container">
+									<div class="exp-placard left-placard">
+										<div class="exp-placard-number">4+</div>
+										<div class="exp-placard-label">Years in Robotics and Automation</div>
+									</div>
+									<div class="exp-placard right-placard">
+										<div class="exp-placard-number">6</div>
+										<div class="exp-placard-label">Years of Programming Experience</div>
+									</div>
+								</div>
+																				
 							</section>
-							<!-- <section> -->
+
+							<section> 
 								<div class="box">
 									<h2>Skills</h2>
 									<ul class="skill-list">
-									<li><i class="fas fa-code"></i> Programming Languages: C, C++, C#, Python <i class="fab fa-python"></i></li><br>
-									<li><i class="fas fa-gamepad"></i> Game Development: Unity <i class="fab fa-unity"></i>, Unreal</li><br>
-									<li><i class="fa-solid fa-code-branch"></i> Version Control: Git <i class="fab fa-github"></i></li><br>
-									<li><i class="fab fa-docker"></i> Docker</li><br>
-									<li><i class="fas fa-palette"></i> VR - UI/UX Design</li><br>
-									<li><i class="fas fa-robot"></i> Robot Operating System (ROS/ROS2)</li><br>
-									<li><i class="fas fa-server"></i> Operating Systems: Windows <i class="fab fa-windows"></i>, Linux <i class="fab fa-linux">, </i> Ubuntu <i class="fab fa-ubuntu"></i></li><br>
-									<li><i class="fab fa-android"></i> Android App Development</li>
+									<li><i class="fas fa-code"></i> Programming Languages: C, C++, C#, Python </i></li>
+									<li><i class="fas fa-cogs"></i> Machine Learning Frameworks: TensorFlow, PyTorch</li>
+									<li><i class="fas fa-gamepad"></i> Game Development: Unity <i class="fab fa-unity"></i>, Unreal</i></li>
+									<li><i class="fa-solid fa-code-branch"></i> Version Control: Git <i class="fab fa-github"></i></li>
+									<li><i class="fab fa-docker"></i> Docker</li>									
+									<li><i class="fas fa-robot"></i> Robot Operating System (ROS/ROS2)</li>
+									<li><i class="fas fa-server"></i> Operating Systems: Windows <i class="fab fa-windows"></i>, Linux <i class="fab fa-linux">, </i> Ubuntu <i class="fab fa-ubuntu"></i></li>
 									</ul>	
 								</div>
-							<!-- </section> -->
+							</section> 
 
-							
 							<section>								
 								<div class="box">
 									<h2>Education</h2>
 									<p><span class="image left"><img src="images/ssn logo.png" alt="" width="65" height="65"/></span> <b> SSN College of Engineering <br> Bachelor of Engineering, Electronics and Communication Engineering </b> <br> 2016 - 2020 </p>
 									<p><span class="image left"><img src="images/University-of-Maryland-Logo.png" alt="" width="150" height="150" /></span> <b> University of Maryland <br> Master of Engineering, Robotics Engineering </b> <br> 2021 - 2023</p>
-								</div>
+								</div>							
 							</section>
 
-							
+							<section>																
+								<h2>Experience</h2>
+								<div class="exp-timeline-container" id="timeline">
+
+									<div class="exp-timeline-line"></div>
+									<div class="exp-timeline-progress" id="progress"></div>
+
+									<!-- ITEM -->
+									<div class="exp-timeline-item exp-left">
+										<div class="exp-content">
+											<div class="exp-header">                    
+												<h3>Caterpillar Inc.</h3>
+											</div>
+											<span class="exp-year">2024 – Present</span>
+											<p><b>Robotics Engineer</b></p>
+											<p>Sensorfusion, Kinematics, Dynamics, Controls, Production deployment.</p>
+										</div>
+									</div>
+
+									<div class="exp-timeline-item exp-right">
+										<div class="exp-content">
+											<div class="exp-header">                    
+												<h3>Maryland Department of Transport</h3>
+											</div>
+											<span class="exp-year">2023 – 2024</span>
+											<p><b>Robotics Software Engineer</b></p>
+											<p>Computer vision, VIO, 3D Reconstruction,State Estimation, Jetson deployment.</p>
+										</div>
+									</div>
+
+									<div class="exp-timeline-item exp-left">
+										<div class="exp-content">
+											<div class="exp-header">                    
+												<h3>UMD Robotics Center</h3>
+											</div>
+											<span class="exp-year">2022 – 2023</span>
+											<p><b>Research Assistant</b></p>
+											<p>Multi-robot autonomy, LiDAR mapping on Spot.</p>
+										</div>
+									</div>
+
+									<div class="exp-timeline-item exp-right">
+										<div class="exp-content">
+											<div class="exp-header">                    
+												<h3>ABU Robocon</h3>
+											</div>
+											<span class="exp-year">2019 – 2020</span>
+											<p><b>Developer</b></p>
+											<p>Quadruped robot, Perception, Path Planning.</p>
+										</div>
+									</div>
+
+								</div>									
+							</section>
 							<section>
 								<div class="box">
 									<h2>Projects</h2>
 									<h4>Checkout My Projects! </h4>
-									<ul>									
-										<li><a href="Planning.html" class="button primary large" style="width: 500px;"><i class="fas fa-route" style="font-size: 2em"></i>  Path Planning Projects</a></li><br>
-										<li><a href="CVprojects.html" class="button primary large" style="width: 500px;"><i class="fas fa-camera" style="font-size: 2em"></i>  Computer Vision Projects</a></li><br>
-										<li><a href="Gamedev.html" class="button primary large" style="width: 500px;"><i class="far fa-vr-cardboard" style="font-size: 2em"></i>  3D, AR/VR Projects</a></li><br>
-										<li><a href="ML.html" class="button primary large" style="width: 500px;"><i class="fas fa-border-none" style="font-size: 2em"></i> Machine Learning Projects</a></li>
+									<div class="projects-container">									
+										<div><a href="Planning.html" class="button primary large" style="width: 500px;"><i class="fas fa-route" style="font-size: 2em"></i>  Path Planning Projects</a></div><br>
+										<div><a href="CVprojects.html" class="button primary large" style="width: 500px;"><i class="fas fa-camera" style="font-size: 2em"></i>  Computer Vision Projects</a></div><br>
+										<div><a href="Gamedev.html" class="button primary large" style="width: 500px;"><i class="far fa-vr-cardboard" style="font-size: 2em"></i>  3D, AR/VR Projects</a></div><br>
+										<div><a href="ML.html" class="button primary large" style="width: 500px;"><i class="fas fa-border-none" style="font-size: 2em"></i> Machine Learning Projects</a></div>
 										
-									</ul>
+									</div>
 								</div>
 							</section>
 
-							<section>
-								<h2>Experience</h2>
-								<h3>Research Assistant, Robotics and Autonomy Lab - MRC (Mar 2022 – May 2023)</h3>
-								<l>
-									<li> Developed an outdoor localization stack for a quadruped robot using EKF sensor fusion of GPS, Odom, IMU 
-										data. </li>
-									<li> Deployed a GPS target – trajectory planner with no a priori map knowledge. </li>
-									<li> Dynamic Window Approach (DWA) planner with obstacle avoidance using Lidar, to follow targets. </li>
-									<li>Research on a novel map integration algorithm generated by aerial drones and ground mobility robots, combined map contains ground perspective view for areas occluded from drones </li> 
-								</l>
-								<br>
-								<h3>Team Lead, ABU Robocon (Oct 2019 - Apr 2020)</h3>
-								<l>
-									<li>Headed a 15-member team in developing a quadruped robot for the ABU Robocon competition 2019.</li>
-									<li>Modeled the quadruped robot using SolidWorks. Mechanical and electrical build of the robot.</li>
-									<li>Improved the SSD-mobilenet V2 object detection model using Transfer Learning to include detection of potholes and 
-									ropes. Achieved average accuracy of 85%.</li>
-									<li>Implemented the customized object detection model to detect dynamic obstacles and recompute trajectories using 
-									the local A* path planner</li>
-								</l>
-								<br>
-								<h3>Research Intern, Indian Institute of Technology, Indore (May 2019 - Jun 2019)</h3>
-								<l>
-									<li> Developed a PID controller for a Shape-Memory Alloy (SMA) Stewart platform using silver-copper metal
-									interfaces based on the analysis of 10 research papers on the implementation of electrical actuation of SMA
-									thin-films </li>
-									<li> Analyzed the actuation efficiency to be 25% higher than direct heat actuation using DAQ and LabVIEW
-									software, reducing the size of the components by more than 70%. </li>
-									<li>Contributing to a research paper on	implementing this actuation methodology in bio-inspired aviation robotics, currently in work.</li>
-								</l>
-							</section>
-							
 
-						<!-- Projects
-							<section class="posts">
-
-
-								<article>
-									<header>
-									
-										<h2><a href="#">Motion Prediction<br />
-										</a></h2>
-									</header>
-									<a href="https://drive.google.com/file/d/1zQpzi1d6MTcVcf1Q8naU1XEkKrvZcsQ3/view?usp=sharing" class="image fit"><img src="images/Googlenet2_output.gif" alt="" /></a>
-									<p>
-										A customized googLeNet model that performs motion prediction for all agents visible to the ego vehicle at a given point in time. 
-										The trained model predicts 5 seconds into the future. It is trained on Lyft's motion prediction dataset.        
-									</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Akhilrajan-V/Motion-Prediction" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="https://drive.google.com/file/d/1zQpzi1d6MTcVcf1Q8naU1XEkKrvZcsQ3/view?usp=sharing" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-
-								<article>
-									<header>
-									
-										<h2><a href="#">Monocular Visual Odometry<br />
-										</a></h2>
-									</header>
-									<a href="https://www.youtube.com/watch?v=Nj5nIHlJmwM" class="image fit"><img src="images/pointcloud.gif" alt="" /></a>
-									<p>
-										Developed a pipeline for Visual Odometry incorporating concepts like feature extraction, Perspective-n-point, nonlinear triangulation, etc.
-										The algorithm implemented works with an average of 50 FPS with 84.3% odometry tracking performance. Algorithm was evaluated using KITTI monocular dataset.        
-									</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/aswathselvam/Mono-V-SLAM" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="https://www.youtube.com/watch?v=Nj5nIHlJmwM" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>	
-
-								<article>
-									<header>
-									
-										<h2><a href="#">RRT Path Planner for 6DOF ARM<br />
-										</a></h2>
-									</header>
-									<a href="https://youtu.be/HobVb2DzqRs" class="image fit"><img src="images/rrt_demo.gif" alt="" /></a>
-									<p>
-										Developed the RRT path planning algorithm for 6 DOF robot manipulator arm - URe10 from scratch. The work space was sampled and graphed based on URe10 configuration space.
-										The exploring tree is built application specific (pick and place) to obtain a quicker path to goal. Thus, joint limits were tuned to reach a predefined work space.        
-									</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Akhilrajan-V/RRT-Manipulator-path_planner" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="https://youtu.be/HobVb2DzqRs" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>	
-
-								<article>
-									<header>
-										<h2><a href="#">AR Tag Detection, Image superimpose and AR Cube projection<br />
-										</a></h2>
-									</header>
-									<a href="https://drive.google.com/file/d/1sI7ecA_CDnoxOU5vWGBy1FHUKwkh2Gbr/view?usp=sharing" class="image fit"><img src="images/cube_SS.png" alt="" /></a>
-									<p>In this project, an AR tag was detected in a video and an image was superimposed on it. Finally, a 3D cube was 
-										augmented on top of it.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="https://drive.google.com/file/d/1sI7ecA_CDnoxOU5vWGBy1FHUKwkh2Gbr/view?usp=sharing" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-								
-								<article>
-									<header>
-										
-										<h2><a href="#">Lane Detection and Turn Prediction<br />
-										</a></h2>
-									</header>
-									<a href="https://drive.google.com/file/d/1pmeUvAdmHoVTQMh2VsuWwOmt2T-Bumat/view?usp=sharing" class="image fit"><img src="images/curve_detect.png" alt="" /></a>
-									<p>
-										The lane detetcion for autonomous vehicle using image processing techniques was implemented.
-										The turn radius of the current lane the vehicle is traveling on, is detected and displayed. The 
-										offset from the center of the lane is also detected to maintain the vehicle in the current lane.											
-									</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="https://drive.google.com/file/d/1pmeUvAdmHoVTQMh2VsuWwOmt2T-Bumat/view?usp=sharing" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-
-								<article>
-									<header>
-									
-										<h2><a href="#">ML Classifiers for Face Recognition<br />
-										</a></h2>
-									</header>
-									<a href="" class="image fit"><img src="" alt="" /></a>
-									<p>
-										Traditional Machine Learning Classifiers like Bayes Classifier, K-NN, SVM, Kernel-SVM, Boosted SVM are implemented from 
-										scratch using mathematical formulation, without any prebuilt packages or libraries. A custom face image dataset is split into 
-										training, validation, and testing sub datasets. Label generation and preprocessing of data. PCA and MDA dimensionality reduction preprocessing 
-										techniques are applied for training optimization. The classifiers can detect the subject label(Face Recognition) or recognize a non-expressive 
-										face and an expressive face(such as a smile).   
-									</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Akhilrajan-V/ML-Classifiers" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-								
-
-								<article>
-									<header>
-										
-										<h2><a href="#">Search and Rescue Robots<br />
-										</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/SAR.png" alt="" /></a>
-									<p>In this project the search and rescue mission aiding robots were simulated.
-										Two turtlebot3 robots were simulated in a custom Gazebo environment. One robot acts as an explorer that autonomously navigates to multiple 
-										target locations and scans for	civilians (enacted by fiducial markers, AruCo tags). The second robot is the rescuer which autonomously
-										navigates to detected civilians in a prioritized order to aid and rescue them.  
-									</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Akhilrajan-V/Search_And_Rescue_Gazebo" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="#" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-
-							
-								<article>
-									<header>
-									
-										<h2><a href="#">Face recognition using CNN<br />
-										</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-									<p>
-										In this project, a convolutional neural network was designed to extract facial features from the two given
-										images. The network detects whether the two images belong to the same person or not. Dataset used for this 
-										project is the <a href="http://vis-www.cs.umass.edu/lfw/">LFW-dataset</a>   
-									</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="#" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-									
-										<h2><a href="#">Controllers for Double Pendulum on a Cart<br />
-										</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/double_pendulum.png" alt="" /></a>
-									<p>
-										Balancing two pendulums on top of a moving cart is a classic controls theory problem. Various controllers implemented
-										and analyzed were LQR, LQG, and LQI controllers. The Luenberger observer was also implemented for state estimation of the 
-										model.
-									</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="#" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-
-								<article>
-									<header>
-									
-										<h2><a href="#">A* Path planner for TurtleBot3 Robot<br />
-										</a></h2>
-									</header>
-									<a href="https://drive.google.com/file/d/1jPLDGjhEVGJmv3vbVF6zBqmSQ8EbIT0m/view?usp=sharing" class="image fit"><img src="images/astar_turtlebot_sim.gif" alt="" /></a>
-									<p>
-										In this project, a 3D environment was converted into a 2D map to run a simple search based path planner. 
-										A star path planner calculates the optimal path by using the RPMs of the two wheels of the TurtleBot3 Burger robot as action set parameters.
-										A publisher sends the RPM values to a simulated robot to navigate to the desired goal in the 3D gazebo environment.
-									</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/Akhilrajan-V/Astar-Turtlebot3" class="button">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="https://drive.google.com/file/d/1jPLDGjhEVGJmv3vbVF6zBqmSQ8EbIT0m/view?usp=sharing" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-
-								<article>
-									<header>
-									
-										<h2><a href="#">Refueling Robot Manipulator Arm<br />
-										</a></h2>
-									</header>
-									<a href="https://drive.google.com/file/d/1OrHhpGoBn2qK5oGbAFsT2hGMDXmJHmIB/view?usp=sharing" class="image fit"><img src="images/arm.gif" alt="" /></a>
-									<p>
-										A custom 6 Degree of Freedom robot manipulator arm was modelled in SolidWorks and deployed in Gazebo.
-										The forward and inverse kinematic controller computes the joint angles based on the end-effector positions controls the arm trajectory.
-										This application specific robot arm unscrews the vehicle fuel tank lid and places it on the workbench.
-									</p>
-									<ul class="actions special">
-										<li><a href="" class="button small">View Project</a></li>
-									</ul>
-									<ul class="icons alt">
-										<li><a href="https://drive.google.com/file/d/1jPLDGjhEVGJmv3vbVF6zBqmSQ8EbIT0m/view?usp=sharing" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-									</ul>
-								</article>
-
-							</section> -->
-
-					
-						<!-- <footer id="about_me">
-							<div class="box" id="about_me">
-								<section>
-									<p><span class="image left"><img src="images/me.jpg" alt="" /></span>Hello! I am Akhil, an aspiring robotics enthusiast. I am currently   
-										pursuing my master's degree in robotics engineering at the University of Maryland (UMD), USA. I also work as a Research Assistant at the Robotics and 
-										Autonomy Lab, UMD. My areas of research include path planning, SLAM, outdoor navigation, multi-robot collaborative decision making, ML, Deep Learning, and perception. 
-										I graduated with a Bachelor's degree in Electronics and Communication Engineering from SSN College of Engineering, Chennai, India in 2020. I have 
-										extensive research and project experiences in the fields of Machine Learning, Planning and various Software package development (Autonomy Stack) such as 
-										navigation, perception based localization, swarm-robot interface and navigation stack. 
-										</p>
-									<ul class="icons">
-									
-										<li><a href="https://www.linkedin.com/in/akhilrajan/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-										<li><a href="https://github.com/Akhilrajan-V" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-									</ul>
-								</section>
-							</div>	
-						</footer> -->
 						<footer>
 							<section>
 								<div class="box" id="coonect">
@@ -437,6 +545,42 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+		
+			<script>
+			const progress = document.getElementById('progress');
+			const timeline = document.getElementById('timeline');
+			const items = document.querySelectorAll('.exp-timeline-item');
 
+			window.addEventListener('scroll', () => {
+				const scrollTop = window.scrollY;
+				const timelineTop = timeline.offsetTop;
+				const timelineHeight = timeline.offsetHeight;
+				const windowHeight = window.innerHeight;
+
+				// Compute visible portion of timeline
+				let progressHeight = scrollTop + windowHeight/2 - timelineTop;
+
+				// Cap it between 0 and timeline height
+				if(progressHeight < 0) progressHeight = 0;
+				if(progressHeight > timelineHeight) progressHeight = timelineHeight;
+
+				progress.style.height = progressHeight + "px";
+
+				// Reveal items
+				items.forEach(item => {
+					const rect = item.getBoundingClientRect();
+					if(rect.top < window.innerHeight * 0.85) {
+						item.classList.add('show');
+					}
+				});
+			});
+
+// Add click handlers to experience placards
+document.querySelectorAll('.exp-placard').forEach(placard => {
+	placard.addEventListener('click', () => {
+		window.location.href = 'research.html';
+	});
+});
+</script>
 	</body>
 </html>

@@ -115,37 +115,41 @@ input, select, textarea {
 
 /* Type */
 
+html {
+	font-size: 16pt;
+}
+
+@media screen and (max-width: 1680px) {
+
 	html {
-		font-size: 16pt;
+		font-size: 12pt;
 	}
 
-		@media screen and (max-width: 1680px) {
+}
 
-			html {
-				font-size: 12pt;
-			}
+@media screen and (max-width: 1280px) {
 
-		}
-
-		@media screen and (max-width: 1280px) {
-
-			html {
-				font-size: 11pt;
-			}
-
-		}
-
-		@media screen and (max-width: 360px) {
-
-			html {
-				font-size: 10pt;
-			}
-
-		}
-
-	body {
-		color: #212931;
+	html {
+		font-size: 11pt;
 	}
+
+}
+
+@media screen and (max-width: 360px) {
+
+	html {
+		font-size: 10pt;
+	}
+
+}
+
+body {
+	color: #212931;
+}
+
+.selected-text-large {
+	font-size: 1.5rem;
+}
 
 	body, input, select, textarea {
 		font-family: "Merriweather", Georgia, serif;
@@ -4687,3 +4691,4 @@ input, select, textarea {
 		}
 
 	}
+

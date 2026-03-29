@@ -11,6 +11,116 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<style>
+		/* LEFT TIMELINE */
+.timeline {
+    position: fixed;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.timeline ul {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline li {
+    margin: 20px 0;
+    color: #888;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.timeline li.active {
+    color: #fff;
+    font-weight: bold;
+}
+
+.timeline li::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #444;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.timeline li.active::before {
+    background: #18bfef;
+}
+
+/* FADE-IN ANIMATION */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* TECH STACK TAGS */
+.tech-stack {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tech {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #3ac586;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.tech img {
+    width: 16px;
+    height: 16px;
+}
+
+/* COMPANY LOGO STYLING */
+.company-header {
+    display: fle   x;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+}
+
+.company-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+/* HORIZONTAL IMAGE GALLERY */
+.image-gallery {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.image-gallery .image {
+    flex: 1;
+    overflow: hidden;
+}
+
+.image-gallery .image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -27,7 +137,7 @@
 						<ul class="links">
 
 							<li><a href="index.html">HOME</a></li>
-							<li class="active"><a href="research.html">Research</a></li>
+							<li class="active"><a href="research.html">Experience</a></li>
 							<li><a href="CVprojects.html">Perception Projects</a></li>
 							<li><a href="Planning.html">Planning & Prediction Projects</a></li>
 							<li><a href="ML.html">ML Projects</a></li>
@@ -41,30 +151,121 @@
 					</nav>
 
 				<!-- Main -->
-					<div id="main">
+					<div id="main">						
+					<!-- Post -->				
+						<section id="caterpillar" class="post fade-in">
+							<header class="major">
+								<div class="company-header">
+									<img src="images/Caterpillar.png" alt="Caterpillar" class="company-logo">
+									<h3>Caterpillar</h3>
+									<h4>Robotics Engineer</h4>
+								</div>
+								<div class="image-gallery">
+									<div class="image main"><img src="images/Grader.jpg" alt="" /></div>
+									<div class="image main"><img src="images/CatShow.jpg" alt="" /></div>
+									<div class="image main"><img src="images/Cat_Me.jpg" alt="" /></div>
+								</div>
+								<p>
+									I develop and deploy production-grade positioning, estimation, and control systems for industrial machines operating in real-world
+									 environments. My work focuses on building kinematic propagation and sensor fusion frameworks that combine GNSS and IMU data to 
+									 achieve millimeter-level end-effector accuracy. I design modular, platform-agnostic autonomy algorithms and validate them in 
+									 high-fidelity simulation environments before deploying to production hardware.
+								</p>
 
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<h2>Check out my Research work</h2>
-									<p>I worked as a Research Assistant at the Robotics and Autonomy Lab (RAL), part of the Collective Dynamics and Control Laboratory (CDCL) group at the University of Maryland. 
-									This page summarizes my research work and my contributions to several projects.</p>
-								</header>
-								
-								
-								<h2>AIR AND GROUND COLLABORATION</h2>
+								<!-- TECH STACK -->
+								<div class="tech-stack">
+									<div class="tech"><img src="assets\svgs\brands\CPP-100.svg"> C++</div>
+									<div class="tech"><img src="assets\svgs\brands\python.svg"> Python</div>
+									<div class="tech">Sensor Fusion</div>
+									<div class="tech"><img src="assets\svgs\solid\gears.svg"> Kinematics</div>
+									<div class="tech"><img src="assets\svgs\solid\gear.svg"> Control Systems</div>
+									<div class="tech"><img src="assets\svgs\solid\robot.svg"> Simulation</div>
+									<div class="tech"><img src="assets\svgs\brands\protobuf.svg"> Protobuf</div>
+
+								</div>
+							</header>
+						</section>
+
+						<section id="MDOT" class="post fade-in">
+							<header class="major">
+								<div class="company-header">
+									<img src="images\MDOT_Logo.png" alt="MDOT" class="company-logo">
+									<h3>Maryland Department of Transport</h3>
+									<h4>Robotics Software Engineer</h4>
+								</div>
+								<div class="image-gallery">
+									<div class="image main"><img src="images/CulvertDrone.jpg" alt="" /></div>
+									<div class="image main"><img src="images/CulvertPipe.jpg" alt="" /></div>
+									<div class="image main"><img src="images/CulvertPath.jpg" alt="" /></div>
+								</div>
+								<p>
+									Developed an end-to-end autonomous inspection system for storm-drain pipelines using aerial and ground robots. 
+									Led efforts across localization, perception, and mapping in GPS-denied environments, implementing VIO with 
+									EKF-based sensor fusion to achieve reliable navigation. Deployed a real-time defect detection pipeline using 
+									YOLOv5 on NVIDIA Jetson Xavier (45 FPS) and built a 3D reconstruction system using Gaussian Splatting for 
+									accurate scene modeling in feature-scarce underground conditions.
+								</p>
+
+								<!-- TECH STACK -->
+								<div class="tech-stack">
+									<div class="tech"><img src="assets\svgs\brands\python.svg"> Python</div>
+									<div class="tech"><img src="assets\svgs\brands\ros-icon.svg"> ROS</div>
+									<div class="tech"><img src="assets\svgs\solid\camera.svg"> Gaussian Splatting</div>
+									<div class="tech"><img src="assets\svgs\solid\map.svg"> State Estimation</div>									
+								</div>
+							</header>
+						</section>
+
+						<section id="UMD" class="post fade-in">
+							<header class="major">
+								<div class="company-header">
+									<img src="images/UMD_Robotics_Logo.png" alt="UMD-Robotics-Robot" class="company-logo">
+									<h3>UMD Robotics Research Lab</h3>
+									<h4>Robotics Researcher</h4>
+								</div>
 								<div class="image main"><img src="images/20221123_144605.jpg" alt="" /></div>
-								<p>A swarm of aerial drones and ground mobile robots colloborative task and decision making. Implemented Extended Kalman Filter for sensor fusion of GPS, IMU, Odom to localize the mobile robots outdoors.
-								   The drones perform target search in a designated area and send the detected target GPS coordinates to the mobile robots. Doodle radio acts as the communication device.
-								   The ground mobile robots have no a priori knowledge of the environment. The local planner maps the environment as the mobile robot navigates towards the goal.
-								   The local planner is a Dynamic Window Approach(DWA) planner capable of dynamic obstacle avoidance using Lidar point cloud data. </p>
+								<p>
+									Developed a collaborative multi-robot system where aerial drones perform target search and communicate GPS coordinates to ground robots. 
+									Implemented EKF-based sensor fusion for localization using GPS, IMU, and odometry. Designed a Dynamic Window Approach (DWA) planner with 
+									LiDAR-based obstacle avoidance and real-time mapping in unknown environments.
+								</p>
+
+								<!-- TECH STACK -->
+								<div class="tech-stack">
+									<div class="tech"><img src="assets\svgs\brands\python.svg"> Python</div>
+									<div class="tech"><img src="assets\svgs\brands\ros-icon.svg"> ROS</div>
+									<div class="tech"><img src="assets\svgs\solid\gears.svg"> Controls</div>
+									<div class="tech"><img src="assets\svgs\solid\map.svg"> Locomotion</div>
+									<div class="tech"><img src="assets\svgs\solid\camera-retro.svg"> Computer Vision</div>
+									<div class="tech"><img src="assets\svgs\solid\route.svg"> Path Planning</div>
+								</div>
+							</header>
+						</section>
+						<!-- <section class="post">
+								<header class="major">
+								<h2>Experience</h2>			
+								<h3>Caterpillar Inc.</h3>
+								<div class="image main"><img src="images/20221123_144605.jpg" alt="" /></div>
+								<p>I develop and deploy production-grade positioning, estimation, and control systems for industrial machines operating in real-world 
+									environments. My work focuses on building kinematic propagation and sensor fusion frameworks that combine GNSS and IMU data to achieve
+									millimeter-level end-effector accuracy. I design modular, platform-agnostic autonomy algorithms and validate them in high-fidelity 
+									simulation environments before deploying to production hardware. This role has strengthened my ability to build robust, scalable systems
+									that bridge simulation and real-world performance with a strong emphasis on reliability and testing.</p>
 							</section>
 
-					
+							<section class="post">
+							<header class="major">														
+							<h3>Multi-robot Navigation for Search and Rescue</h3>
+							<div class="image main"><img src="images/20221123_144605.jpg" alt="" /></div>
+							<p>A swarm of aerial drones and ground mobile robots colloborative task and decision making. Implemented Extended Kalman Filter for sensor fusion of GPS, IMU, Odom to localize the mobile robots outdoors.
+								The drones perform target search in a designated area and send the detected target GPS coordinates to the mobile robots. Doodle radio acts as the communication device.
+								The ground mobile robots have no a priori knowledge of the environment. The local planner maps the environment as the mobile robot navigates towards the goal.
+								The local planner is a Dynamic Window Approach(DWA) planner capable of dynamic obstacle avoidance using Lidar point cloud data. </p>
+						</section> -->
 
 						<footer>
 							<section>
-								<div class="box" id="coonect">
+								<div class="box" id="connect">
 								
 									<h2>Connect with me</h2>
 										<ul class="icons">
@@ -85,6 +286,14 @@
 
 			</div>
 
+			<div class="timeline">
+				<ul>
+					<li data-target="caterpillar" class="active">Caterpillar (2024 – Present)</li>
+					<li data-target="MDOT">Maryland Department of Transport (2023 – 2024)</li>
+					<li data-target="UMD">UMD Robotics Research Lab (2022 – 2023)</li>
+				</ul>
+			</div>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
@@ -93,6 +302,36 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				const sections = document.querySelectorAll(".fade-in");
+				const navItems = document.querySelectorAll(".timeline li");
 
+				// Fade-in animation
+				const observer = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("visible");
+
+							// Highlight timeline
+							navItems.forEach(item => {
+								item.classList.remove("active");
+								if (item.dataset.target === entry.target.id) {
+									item.classList.add("active");
+								}
+							});
+						}
+					});
+				}, { threshold: 0.3 });
+
+				sections.forEach(section => observer.observe(section));
+
+				// Scroll on click
+				navItems.forEach(item => {
+					item.addEventListener("click", () => {
+						document.getElementById(item.dataset.target)
+							.scrollIntoView({ behavior: "smooth" });
+					});
+				});
+			</script>
 	</body>
 </html>
