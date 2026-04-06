@@ -1,5 +1,5 @@
 {
     "ros.distro": "noetic",
-    "liveServer.settings.CustomBrowser": "firefox",
+    "liveServer.settings.CustomBrowser": "microsoft-edge",
     "editor.fontWeight": "normal"
 }
